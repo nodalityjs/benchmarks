@@ -1,0 +1,19 @@
+const items = [
+  { img: "/placeholder.jpg", title: "Title", link: "#" },
+  { img: "/placeholder.jpg", title: "Title", link: "#" },
+  { img: "/placeholder.jpg", title: "Title", link: "#" },
+];
+
+export default function Cards() {
+  return (
+    <div className="flex flex-wrap justify-center gap-4">
+      {items.map((c, i) => (
+        <div key={i} className="flex flex-col w-[300px] h-[700px] rounded-[0.7rem] m-[0.8rem]">
+          <img src={c.img} alt={c.title} className="w-full" />
+          <h5 className="text-orange-500 text-xl">{c.title}</h5>
+          <a href={c.link} className="bg-[#3498db] text-white rounded-[0.4rem] px-2 py-4">{c.title}</a>
+        </div>
+      ))}
+    </div>
+  );
+}

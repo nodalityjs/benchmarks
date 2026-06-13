@@ -1,0 +1,18 @@
+new FlexGrid()
+  .set({ colat: "700px", wrap: true, align: "center", gap: "1rem" })
+  .items(
+    [
+      { img: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Starship_S20.jpg", title: "Starship", link: "#ship" },
+      { img: "https://upload.wikimedia.org/wikipedia/commons/1/16/Apollo_11_Launch_-_GPN-2000-000630.jpg", title: "Saturn V", link: "#saturn" },
+      { img: "https://upload.wikimedia.org/wikipedia/commons/d/d6/STS120LaunchHiRes-edit1.jpg", title: "Shuttle", link: "#shuttle" }
+    ].map(item =>
+      new Card()
+        .set({ width: "300px", height: "700px", radius: "0.7rem", mar: { sides: ["all"], value: "0.8rem" } })
+        .items([
+          new Image(item.img).set({ isFull: true, url: item.img }),
+          new Text(item.title).set({ size: "S5", color: "orange" }),
+          new Link("Link").set({ text: item.title, url: item.link, background: "#3498db", pad: [{ lr: "0.5rem", tb: "1rem" }], radius: "0.4rem", color: "white" })
+        ])
+    )
+  )
+  .render("#mount");
