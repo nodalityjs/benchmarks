@@ -1,0 +1,49 @@
+{
+  "library": "/Users/filipvabrousek/launch",
+  "reps": 7,
+  "node": "v25.6.0",
+  "rows": [
+    {
+      "n": 10,
+      "ms": 27.02,
+      "bytes": 2339,
+      "us_per_element": 2702.4
+    },
+    {
+      "n": 25,
+      "ms": 32.1,
+      "bytes": 5684,
+      "us_per_element": 1284.1
+    },
+    {
+      "n": 50,
+      "ms": 42.05,
+      "bytes": 11259,
+      "us_per_element": 840.9
+    },
+    {
+      "n": 100,
+      "ms": 73.91,
+      "bytes": 22409,
+      "us_per_element": 739.1
+    },
+    {
+      "n": 250,
+      "ms": 185.12,
+      "bytes": 56009,
+      "us_per_element": 740.5
+    },
+    {
+      "n": 500,
+      "ms": 402.52,
+      "bytes": 112009,
+      "us_per_element": 805
+    },
+    {
+      "n": 1000,
+      "ms": 926.35,
+      "bytes": 224009,
+      "us_per_element": 926.4
+    }
+  ]
+}
