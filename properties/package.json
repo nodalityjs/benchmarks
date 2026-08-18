@@ -3,9 +3,11 @@
   "private": true,
   "type": "module",
   "description": "Executable check of the model properties argued in Chapter 3 and reported in Section 8.2.",
-  "scripts": { "start": "node run.mjs" },
+  "scripts": {
+    "start": "node run.mjs"
+  },
   "dependencies": {
     "jsdom": "^29.1.1",
-    "nodality": "1.0.178"
+    "nodality": "1.2.2"
   }
 }

@@ -25,8 +25,7 @@ nodes.
     npm install
     node run.mjs
 
-`nodality` is pinned to the exact version the dissertation reports
-(`1.0.178`), not a range, so the check runs against the artefact that
+`nodality` is pinned to an exact version, not a range, so the check runs against the artefact that
 produced the reported results.
 
 ## Result
@@ -35,7 +34,7 @@ produced the reported results.
     PASS  order-dependence: [C,D] !== [D,C] when both write the same property
     PASS  first-declared-wins: the earlier declaration survives in each ordering
     PASS  determinism: the same pair compiles to a byte-identical artefact
-    4/4 properties confirmed against nodality@1.0.178
+    4/4 properties confirmed against nodality@1.2.2
 
 ## A note on the fixture
 
