@@ -69,6 +69,44 @@ approximately linear once the fixed `jsdom` set-up cost is amortised; the
 decline in the per-element column across the first three rows is that fixed
 cost being spread over more work, not the compiler getting faster.
 
+## 3. Crawlability, first paint and page-size sweep
+
+What a JavaScript-free crawler extracts from prerendered output versus the
+client-only shell, using the real `prerender()`; the first-paint timing of both
+in a real browser; and a page-size sweep that locates the flicker threshold.
+
+Files: `SSG-bench/` (`run.mjs`, `timing.mjs`, `sweep.mjs`).
+
+Run (see `SSG-bench/README.md` for detail):
+
+    cd SSG-bench && npm install && node run.mjs
+
+## 4. Model properties
+
+An executable check of the properties the model claims: order-independence for
+nodes whose targets are disjoint, first-declared-wins where two nodes contend
+for the same property, and byte-identical output on a repeated build. Each case
+is compiled through the published compiler in a `jsdom` document and compared on
+the rendered output rather than on the library's internals.
+
+Files: `properties/` (`run.mjs`, `template.html`).
+
+Run:
+
+    cd properties && npm install && node run.mjs
+
+Result (`nodality` 1.0.178):
+
+    PASS  order-independence: [A,B] === [B,A] when targets are disjoint
+    PASS  order-dependence: [C,D] !== [D,C] when both write the same property
+    PASS  first-declared-wins: the earlier declaration survives in each ordering
+    PASS  determinism: the same pair compiles to a byte-identical artefact
+    4/4 properties confirmed
+
+`properties/` and `SSG-bench/` pin `nodality` to an exact version rather than a
+range, so a fresh install reproduces the figures against the artefact that
+produced them rather than against the newest release.
+
 ## Citing
 
 These data support the Nodality papers. If you use them, cite the paper rather
