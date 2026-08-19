@@ -89,6 +89,11 @@ for the same property, and byte-identical output on a repeated build. Each case
 is compiled through the published compiler in a `jsdom` document and compared on
 the rendered output rather than on the library's internals.
 
+## accessibility
+
+What the platform's accessibility tree contains for canvas-hosted content:
+semantics and keyboard survive, geometry does not. See `accessibility/README.md`.
+
 ## agent-surface
 
 The two checks of Chapter 8's derived agent surface, run against the deployed
