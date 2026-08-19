@@ -17,7 +17,8 @@ difference observed cannot be attributed to incidental interaction among many
 nodes.
 
 ## Files
-- `run.mjs`        — the four checks; exits non-zero if any fails
+- `run.mjs`        — the four checks on two minimal fixtures; exits non-zero if any fails
+- `random.mjs`     — the same three claims over SEEDED RANDOM pages, every permutation per page
 - `template.html`  — the mount shell both cases are compiled into
 
 ## Run
@@ -47,3 +48,28 @@ unsuitable for this check rather than incorrect: a gradient's colours are
 carried in a value that the simulated DOM's CSS parser discards, so a
 difference between two contending gradients would not be visible in the
 rendered output even though the compiler resolved it.
+
+## Randomised check
+
+`run.mjs` checks the smallest inputs on which ordering can matter. `random.mjs`
+complements it by manufacturing pages the author did not choose and holding each
+to the same claims — for every permutation of its node array, not a sampled one.
+
+    node random.mjs              # seed 20260819, 60 pages
+    node random.mjs 12345 200    # explicit seed and page count
+
+Generation is seeded, so a reported run reproduces exactly.
+
+Result (`nodality` 1.2.2, seed 20260819, 60 pages):
+
+    seed 20260819, 60 generated pages (30 disjoint, 30 conflicting), all permutations per page
+      order-independence  : 30 pages checked
+      first-declared-wins : 30 pages checked
+      determinism         : 60 pages checked
+
+    no counter-example found
+
+The pages are generated within the class the formal claim covers: nodes whose
+contribution is fixed at declaration (Chapter 3's constant-on-write restriction).
+A generator that produced value-dependent nodes would be testing a claim the
+model does not make.

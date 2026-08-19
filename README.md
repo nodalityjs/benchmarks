@@ -89,7 +89,7 @@ for the same property, and byte-identical output on a repeated build. Each case
 is compiled through the published compiler in a `jsdom` document and compared on
 the rendered output rather than on the library's internals.
 
-Files: `properties/` (`run.mjs`, `template.html`).
+Files: `properties/` (`run.mjs` for the minimal fixtures, `random.mjs` for the seeded randomised sweep, `template.html`).
 
 Run:
 
