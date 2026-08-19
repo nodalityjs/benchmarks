@@ -107,7 +107,7 @@ Run:
 
     cd properties && npm install && node run.mjs
 
-Result (`nodality` 1.2.2):
+Result (`nodality` 1.2.4):
 
     PASS  order-independence: [A,B] === [B,A] when targets are disjoint
     PASS  order-dependence: [C,D] !== [D,C] when both write the same property

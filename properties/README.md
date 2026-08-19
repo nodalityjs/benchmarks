@@ -35,7 +35,7 @@ produced the reported results.
     PASS  order-dependence: [C,D] !== [D,C] when both write the same property
     PASS  first-declared-wins: the earlier declaration survives in each ordering
     PASS  determinism: the same pair compiles to a byte-identical artefact
-    4/4 properties confirmed against nodality@1.2.2
+    4/4 properties confirmed against nodality@1.2.4
 
 ## A note on the fixture
 
@@ -60,7 +60,7 @@ to the same claims — for every permutation of its node array, not a sampled on
 
 Generation is seeded, so a reported run reproduces exactly.
 
-Result (`nodality` 1.2.2, seed 20260819, 60 pages):
+Result (`nodality` 1.2.4, seed 20260819, 60 pages):
 
     seed 20260819, 60 generated pages (30 disjoint, 30 conflicting), all permutations per page
       order-independence  : 30 pages checked
