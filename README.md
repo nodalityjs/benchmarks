@@ -96,6 +96,16 @@ site: the manifest is readable without executing anything, and a client that
 knows nothing about the site drives it through the declared interface. See
 `agent-surface/README.md`.
 
+## crawl
+
+The no-JavaScript crawler view of the deployed sites, from public URLs only.
+Reproduces the production table of Chapter 8. See `crawl/README.md`.
+
+## determinism
+
+Per-site build determinism: build twice from unchanged source, compare every
+emitted artefact by digest. See `determinism/README.md`.
+
 ## validity
 
 WHATWG conformance of the deployed pages, measured with the W3C Nu validator and

@@ -68,8 +68,14 @@ for (const n of SIZES) {
       if (early && m.painted != null) flickers.push(m.painted - m.fcp);
     }
   }
-  const earlyRate = earlyFlags.reduce((a, b) => a + b, 0) / earlyFlags.length;
-  rows.push({ n, words: meta[n].words, kb: (meta[n].bytes / 1024).toFixed(0), earlyRate, flickerMs: flickers.length ? median(flickers).toFixed(0) : "-" });
+  // A size where no load produced both an FCP and a runtime mark has measured
+  // nothing. Dividing by zero there yields NaN, which printed next to "no" and
+  // read as a clean no-flicker result — the one reading it must never be
+  // mistaken for. Report the sample count instead.
+  const earlyRate = earlyFlags.length ? earlyFlags.reduce((a, b) => a + b, 0) / earlyFlags.length : null;
+  rows.push({ n, words: meta[n].words, kb: (meta[n].bytes / 1024).toFixed(0), earlyRate,
+              samples: earlyFlags.length,
+              flickerMs: flickers.length ? median(flickers).toFixed(0) : "-" });
 }
 
 await browser.close();
@@ -78,9 +84,16 @@ for (const n of SIZES) fs.rmSync(path.join(ROOT, `tmp.out.${n}.html`), { force: 
 
 console.log(`\n=== Page-size sweep (Chromium, ${RUNS} loads each) ===`);
 console.log(`  N    words   KB     flicker?(paint-before-clear rate)   flicker window`);
+let incomplete = 0;
 for (const r of rows) {
+  if (r.earlyRate === null) {
+    incomplete++;
+    console.log(`  ${String(r.n).padStart(3)}  ${String(r.words).padStart(6)}  ${String(r.kb).padStart(4)}     no samples — not measured`);
+    continue;
+  }
   const flag = r.earlyRate >= 0.5 ? "FLICKER" : "no";
   console.log(`  ${String(r.n).padStart(3)}  ${String(r.words).padStart(6)}  ${String(r.kb).padStart(4)}   ${(r.earlyRate * 100).toFixed(0).padStart(3)}%  ${flag.padEnd(8)}  ${r.flickerMs === "-" ? "-" : r.flickerMs + " ms"}`);
 }
-const firstFlicker = rows.find((r) => r.earlyRate >= 0.5);
+if (incomplete) console.log(`\n  ${incomplete} size(s) collected no usable sample and are NOT evidence of no flicker.`);
+const firstFlicker = rows.find((r) => r.earlyRate !== null && r.earlyRate >= 0.5);
 console.log(`\nThreshold: flicker first appears at N=${firstFlicker ? firstFlicker.n + ` (~${firstFlicker.words} words, ~${firstFlicker.kb} KB)` : "not within tested range"}.`);
