@@ -4,12 +4,12 @@ Reproduces the three properties argued in Chapter 3 of the dissertation, by
 compiling each case through the published `nodality` compiler in a simulated
 DOM and comparing the rendered output:
 
-1. **Order-independence** — two nodes whose targets are disjoint compile to
+1. **Order-independence** – two nodes whose targets are disjoint compile to
    identical output under both orderings.
-2. **Order-dependence with first-declared-wins** — two nodes that write the
+2. **Order-dependence with first-declared-wins** – two nodes that write the
    same property of the same element compile to *different* output under the
    two orderings, and in each ordering the earlier declaration survives.
-3. **Determinism** — the same pair `(E, N)` compiles to a byte-identical
+3. **Determinism** – the same pair `(E, N)` compiles to a byte-identical
    artefact on repeated runs.
 
 Two nodes is the smallest input on which ordering can matter, so any
@@ -17,9 +17,9 @@ difference observed cannot be attributed to incidental interaction among many
 nodes.
 
 ## Files
-- `run.mjs`        — the four checks on two minimal fixtures; exits non-zero if any fails
-- `random.mjs`     — the same three claims over SEEDED RANDOM pages, every permutation per page
-- `template.html`  — the mount shell both cases are compiled into
+- `run.mjs`        – the four checks on two minimal fixtures; exits non-zero if any fails
+- `random.mjs`     – the same three claims over SEEDED RANDOM pages, every permutation per page
+- `template.html`  – the mount shell both cases are compiled into
 
 ## Run
 
@@ -53,7 +53,7 @@ rendered output even though the compiler resolved it.
 
 `run.mjs` checks the smallest inputs on which ordering can matter. `random.mjs`
 complements it by manufacturing pages the author did not choose and holding each
-to the same claims — for every permutation of its node array, not a sampled one.
+to the same claims – for every permutation of its node array, not a sampled one.
 
     node random.mjs              # seed 20260819, 60 pages
     node random.mjs 12345 200    # explicit seed and page count

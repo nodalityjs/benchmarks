@@ -6,9 +6,9 @@ source produce byte-identical output?
     node run.mjs /path/to/site [/path/to/another ...]
 
 This is the reproducible-build property at site scale rather than page scale.
-A site build has more opportunities to leak non-determinism than a page build —
+A site build has more opportunities to leak non-determinism than a page build  – 
 iteration over a directory listing, a locale map, a collected route set, and
-the sitemap and manifest written after the routes — and any of them surfaces
+the sitemap and manifest written after the routes – and any of them surfaces
 here as a digest mismatch. A single differing byte in a single route fails the
 site.
 
@@ -21,10 +21,10 @@ its dependencies installed and a `nodality prerender` script.
 
 ## Result (2026-08-19, nodality 1.2.4)
 
-    blue70.cz      49 artefacts — byte-identical
-    sls3.cz        32 artefacts — byte-identical
-    gesos.cz       15 artefacts — byte-identical
-    relays.app      6 artefacts — byte-identical
+    blue70.cz      49 artefacts – byte-identical
+    sls3.cz        32 artefacts – byte-identical
+    gesos.cz       15 artefacts – byte-identical
+    relays.app      6 artefacts – byte-identical
 
     102 artefacts compared across 4 projects; all byte-identical
 

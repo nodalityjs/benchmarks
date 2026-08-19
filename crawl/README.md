@@ -1,6 +1,6 @@
 # Crawl
 
-The no-JavaScript crawler view of the deployed sites — what a crawler that
+The no-JavaScript crawler view of the deployed sites – what a crawler that
 executes no JavaScript actually receives from each live URL.
 
     node run.mjs                      # the four deployments
@@ -13,7 +13,7 @@ No sources needed: it fetches public URLs, so anyone can re-run it.
 Word counts vary by method, so the method is stated rather than assumed:
 `script`, `style`, `noscript` and `template` contents are removed, remaining
 tags are stripped, and what is left is split on whitespace. Redirects are
-followed and the figures are those of the document served after the redirect —
+followed and the figures are those of the document served after the redirect  – 
 `blue70.cz` redirects to its `www` host, and the figures are the `www` one's.
 
 ## Result (2026-08-19, after the 1.2.4 redeploy)
@@ -30,8 +30,8 @@ followed and the figures are those of the document served after the redirect —
 HTTP. `relays.app` serves no JSON-LD; the other three do.
 
 These are live sites and the figures drift as content changes, so the date is
-part of the measurement. The qualitative result — nonzero indexable content on
-every migrated site, against the zero a client-only shell serves — is what the
+part of the measurement. The qualitative result – nonzero indexable content on
+every migrated site, against the zero a client-only shell serves – is what the
 table is evidence for, and it is stable across re-measurement.
 
 The `id=undefined` column is a regression guard rather than a crawler metric.

@@ -9,7 +9,7 @@ deployed site rather than a local copy.
 `gesos.cz` refuses HTTPS to this client, so the plain-HTTP origin is the
 default; the served bytes are the same either way.
 
-## Check 1 — the manifest is readable without executing anything
+## Check 1 – the manifest is readable without executing anything
 
 An ordinary HTTP GET retrieves `/agent-manifest.json`, so a consumer that runs
 no JavaScript can read what the site can do. This is what separates the
@@ -17,7 +17,7 @@ mechanism from registration schemes that publish their tools by executing
 script inside a live page: those are unavailable to exactly the non-executing
 consumers prerendering exists to serve.
 
-## Check 2 — a client that knows nothing about the site drives it
+## Check 2 – a client that knows nothing about the site drives it
 
 The client reads the published tool list, takes the destinations from the
 enumeration the site itself declares, invokes the traversal tool for each, and
@@ -41,20 +41,20 @@ Two details make this a test rather than a demonstration:
 
 ## Result (2026-08-19, gesos.cz)
 
-    CHECK 1 — the manifest is readable without executing anything
-      PASS  GET http://gesos.cz/agent-manifest.json — HTTP 200
-      PASS  manifest declares pages — en/morph.html, morph.html
-      PASS  a page declares a traversal tool — en/morph.html
-      PASS  the page records the specification draft it was derived against — 2026-07-21
-      PASS  the page declares a tool set — gesos_navigate, gesos_go_back, gesos_read_view
-      PASS  the traversal enumerates its destinations — about, offer, contact
+    CHECK 1 – the manifest is readable without executing anything
+      PASS  GET http://gesos.cz/agent-manifest.json – HTTP 200
+      PASS  manifest declares pages – en/morph.html, morph.html
+      PASS  a page declares a traversal tool – en/morph.html
+      PASS  the page records the specification draft it was derived against – 2026-07-21
+      PASS  the page declares a tool set – gesos_navigate, gesos_go_back, gesos_read_view
+      PASS  the traversal enumerates its destinations – about, offer, contact
 
-    CHECK 2 — a client that knows nothing about the site drives it
-      PASS  the page registered its tools — gesos_navigate, gesos_go_back, gesos_read_view
+    CHECK 2 – a client that knows nothing about the site drives it
+      PASS  the page registered its tools – gesos_navigate, gesos_go_back, gesos_read_view
       PASS  the registered tools are the ones the manifest declared
-      PASS  traversed to "about" — landed on "about", heading "O nás"
-      PASS  traversed to "offer" — landed on "offer", heading "Nabídka"
-      PASS  traversed to "contact" — landed on "contact", heading "Kontakt"
+      PASS  traversed to "about" – landed on "about", heading "O nás"
+      PASS  traversed to "offer" – landed on "offer", heading "Nabídka"
+      PASS  traversed to "contact" – landed on "contact", heading "Kontakt"
 
 The figures are a snapshot of a live deployment and will move as the site is
 rebuilt. Re-running the script re-measures.

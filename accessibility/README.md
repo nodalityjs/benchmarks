@@ -11,8 +11,8 @@ platform exposes for canvas **fallback content**, and decide whether the
 accessibility tree is sufficient for navigation. This is that measurement.
 
 It is deliberately narrow. It reads the browser's own accessibility tree
-through the DevTools protocol — the tree the platform hands to a screen
-reader — on one engine. It does not run a screen reader, and it does not
+through the DevTools protocol – the tree the platform hands to a screen
+reader – on one engine. It does not run a screen reader, and it does not
 speak for engines it did not run on.
 
 Two pages, identical in markup, differing only in whether the content is
@@ -23,14 +23,14 @@ hosted inside a `<canvas>` as its fallback content:
 
 ## Result (2026-08-19, Chromium 151)
 
-    BASELINE — content in a <div>
+    BASELINE – content in a <div>
       accessibility tree: RootWebArea, heading "Section heading", paragraph,
                           link "A link to somewhere", button "A button",
                           LabelText, textbox "A field"
       keyboard-reachable: lnk, btn, fld
       reported geometry : lnk=133x18  btn=65x21  fld=153x21
 
-    HOSTED — the same content as <canvas> fallback
+    HOSTED – the same content as <canvas> fallback
       accessibility tree: RootWebArea, Canvas, heading "Section heading",
                           paragraph, link "A link to somewhere",
                           button "A button", LabelText, textbox "A field"
@@ -47,7 +47,7 @@ reader that navigates by tree traversal or by Tab reaches the whole interface.
 
 **Geometry does not survive.** Every hosted control reports a zero-size box.
 That is the same loss the pointer suffered, and it is why Chapter 6 needed a
-retargeting mechanism at all — but it cannot be repaired the same way. Pointer
+retargeting mechanism at all – but it cannot be repaired the same way. Pointer
 input *arrives* as a coordinate, so it can be inverted through the compiled
 transform on the way in. Geometry is *reported* to the client on the way out,
 and nothing asks the page to correct it first.

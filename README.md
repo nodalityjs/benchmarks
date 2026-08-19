@@ -14,12 +14,12 @@ rendered 3-card grid in Nodality vs raw React + Tailwind, using the
 
 Files:
 
-- `nod_stub.txt` — Nodality scaffold spec the model emits (placeholder data supplied locally by the compiler)
-- `react_scaffold.txt` — React + Tailwind placeholder scaffold the model must emit (no local-expansion layer)
-- `nod_real.txt` — Nodality spec when the model supplies real content
-- `react.txt` — React + Tailwind with the same real content
-- `nod_full.txt` — the working JS the Nodality compiler produces locally (0 model tokens)
-- `measure.py` — counts tokens for all of the above
+- `nod_stub.txt` – Nodality scaffold spec the model emits (placeholder data supplied locally by the compiler)
+- `react_scaffold.txt` – React + Tailwind placeholder scaffold the model must emit (no local-expansion layer)
+- `nod_real.txt` – Nodality spec when the model supplies real content
+- `react.txt` – React + Tailwind with the same real content
+- `nod_full.txt` – the working JS the Nodality compiler produces locally (0 model tokens)
+- `measure.py` – counts tokens for all of the above
 
 Run:
 
@@ -38,14 +38,14 @@ Boilerplate alone (content held out, 128 shared tokens): ~21 vs ~184, about 9x.
 ## 2. Compiler scaling
 
 Times the compile-and-serialise cycle as the number of declared elements grows
-from 10 to 1 000, using the library's own build path — the single builder
-executed inside a `jsdom` document — and taking the median of seven repetitions
+from 10 to 1 000, using the library's own build path – the single builder
+executed inside a `jsdom` document – and taking the median of seven repetitions
 per point.
 
 Files:
 
-- `compile_scaling/compile_scaling.mjs` — the harness
-- `compile_scaling/compile_scaling.json` — raw measurements, one record per element count
+- `compile_scaling/compile_scaling.mjs` – the harness
+- `compile_scaling/compile_scaling.json` – raw measurements, one record per element count
 
 Run (needs a local checkout of the library and `jsdom`):
 

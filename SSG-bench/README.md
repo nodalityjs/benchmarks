@@ -2,9 +2,9 @@
 
 Two reproducible measurements on the published `nodality` npm package:
 
-1. **Crawlability** — what a JavaScript-free crawler extracts from the
+1. **Crawlability** – what a JavaScript-free crawler extracts from the
    prerendered output vs. the client-only shell, using the real `prerender()`.
-2. **First paint / flicker** — first-paint timing of the prerendered page vs.
+2. **First paint / flicker** – first-paint timing of the prerendered page vs.
    the client-only shell in a real browser (Chromium via Playwright).
 
 Both use the same content (`content.mjs`) at build time and runtime, so the
@@ -25,19 +25,19 @@ Playwright reuses an already-installed Chromium; if none is present run
     node sweep.mjs     # page-size sweep: finds the flicker threshold
 
 ## Files
-- `content.mjs`    — shared page content (8 text blocks + 1 link)
-- `render-page.mjs`— shared renderer used at build time and runtime
-- `template.html`  — the HTML shell served before any JS runs (empty `#mount`)
-- `builder.mjs`    — build-time builder (`nodality/ssg` `prerender()`, in jsdom)
-- `app.js`         — runtime builder (browser; imports the `nodality` ESM bundle)
-- `run.mjs`        — crawlability measurement
-- `timing.mjs`     — first-paint / flicker measurement (Playwright)
-- `sweep.mjs`      — page-size sweep for the flicker threshold (Playwright)
-- `out.prerendered.html` — generated output (the file a crawler receives)
+- `content.mjs`    – shared page content (8 text blocks + 1 link)
+- `render-page.mjs` –  shared renderer used at build time and runtime
+- `template.html`  – the HTML shell served before any JS runs (empty `#mount`)
+- `builder.mjs`    – build-time builder (`nodality/ssg` `prerender()`, in jsdom)
+- `app.js`         – runtime builder (browser; imports the `nodality` ESM bundle)
+- `run.mjs`        – crawlability measurement
+- `timing.mjs`     – first-paint / flicker measurement (Playwright)
+- `sweep.mjs`      – page-size sweep for the flicker threshold (Playwright)
+- `out.prerendered.html` – generated output (the file a crawler receives)
 
 ## Results (this machine: Node 25, jsdom, Chromium 1217)
 
-**Crawlability — what a no-JS crawler sees**
+**Crawlability – what a no-JS crawler sees**
 
 | View | indexable words | `#mount` children | links | bytes |
 |---|---:|---:|---:|---:|
@@ -47,7 +47,7 @@ Playwright reuses an already-installed Chromium; if none is present run
 Clear-mount handoff script present in output, **before** the deferred
 `type="module"` runtime script.
 
-**First paint / flicker — median of 15 Chromium loads**
+**First paint / flicker – median of 15 Chromium loads**
 
 Two runs, on different machines. The 2026-08-19 run is the one the
 dissertation reports.
@@ -60,13 +60,13 @@ dissertation reports.
 | Content painted before app.js ran | no | no | no | no |
 | Flicker window             | ≈ 0 ms | ≈ 0 ms | ≈ 0 ms | ≈ 0 ms |
 
-The prerendered/client-only difference moves between runs — 4 ms in favour of
-prerendering on the earlier machine, 0 to 4 ms *against* it on 2026-08-19 —
+The prerendered/client-only difference moves between runs – 4 ms in favour of
+prerendering on the earlier machine, 0 to 4 ms *against* it on 2026-08-19  – 
 so it is run-to-run noise, not an effect. **Prerendering buys no first-paint
 advantage.** What it buys is the crawler-facing content the `crawl/` benchmark
 measures. Reported as a null result rather than quietly dropped.
 
-**Page-size sweep (Chromium, 7 loads per size)** — does a contentful paint of
+**Page-size sweep (Chromium, 7 loads per size)** – does a contentful paint of
 the prerendered mount occur before the clear-mount script runs?
 
 | Page size | Words | Earlier run | 2026-08-19 |
@@ -80,7 +80,7 @@ Flicker window at the threshold: ~940 ms on the earlier machine, 777–792 ms on
 2026-08-19 (three runs).
 
 **The threshold is hardware-dependent, and that is the finding.** It moved by
-roughly 4× between the two machines — from ~1.5 MB to ~3 MB — because the race
+roughly 4× between the two machines – from ~1.5 MB to ~3 MB – because the race
 being measured is between the parser reaching an inline script and the
 compositor deciding to paint, and a faster machine reaches the script sooner.
 Any single number for "the page size at which a flicker appears" is a property
