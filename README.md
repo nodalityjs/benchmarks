@@ -111,6 +111,12 @@ Reproduces the production table of Chapter 8. See `crawl/README.md`.
 Per-site build determinism: build twice from unchanged source, compare every
 emitted artefact by digest. See `determinism/README.md`.
 
+## equivalence
+
+Checks that the two token-benchmark inputs really do render the same
+component, by comparing the design the React file states against the design
+the library emits from defaults. See `equivalence/README.md`.
+
 ## validity
 
 WHATWG conformance of the deployed pages, measured with the W3C Nu validator and
