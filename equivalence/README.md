@@ -24,36 +24,42 @@ values the library actually emitted, converts the Tailwind classes in
     card radius                      11                   11   match
     link radius                       6                    6   match
     link background          52,152,219           52,152,219   match
-    title colour             249,115,22            255,165,0   DIFFERS
+    title colour             249,115,22           249,115,22   match
     grid gap                         16                   16   match
     link padding y                   16                   16   match
     link padding x                    8                    8   match
 
-    8 of 9 comparable design properties match.
+    9 of 9 comparable design properties match.
 
 Every property that determines **layout and structure** is identical: the card
 box, its radius, the grid gap, the link's shape and padding, and the link's
 background colour. The declarative input states none of them and inherits all
 of them, which is what makes the token comparison a like-for-like one.
 
-## The one divergence, stated rather than tuned away
+## The divergence this check found, and how it was closed
 
-The title colour differs. `react.txt` writes `text-orange-500`, which Tailwind
-defines as `rgb(249, 115, 22)`; the library's default resolves to the CSS
+On its first run against `nodality` 1.2.4 this check reported **8 of 9**. The
+title colour differed: `react.txt` writes `text-orange-500`, which Tailwind
+defines as `rgb(249, 115, 22)`, while the library's default resolved to the CSS
 keyword `orange`, `rgb(255, 165, 0)`. Two shades of orange, visibly close and
 not the same value.
 
-It would have been easy to make this row pass by editing `react.txt` to name
-the library's colour. That is not done, for two reasons. Changing a benchmark's
-input so its check goes green is how a benchmark stops being evidence. And the
-divergence is worth knowing: it is the precise sense in which "the same
-rendered component" is an approximation, and a reader is entitled to see the
-size of the approximation rather than take the phrase on trust.
+It was closed by changing **the library**, in release 1.2.5, and not the
+benchmark input. Which side moved matters, so it is stated rather than left for
+a reader to work out:
 
-So the honest reading is: the two inputs render the same component up to one
-colour value. The token claim rests on structure, which is identical, and the
-gap costs the declarative side nothing it does not already report — a caller
-who wanted Tailwind's exact shade would add one colour to the pair, which is
-a handful of tokens against the 163 the React form spends on structure.
+- `react.txt` and `nod_real.txt` are byte-for-byte what they were. Neither
+  measured token count moves, because neither input changed: the scaffold row
+  is still 27 against 220 and the specific-UI row still 149 against 312.
+- The library's card-title default changed from the CSS keyword `orange` to
+  `#f97316`. That is defensible on its own terms — the keyword is a legacy
+  named colour that reads yellow beside modern palettes — and it is the change
+  a reader should scrutinise, since the alternative reading is that the
+  artefact was adjusted to fit the comparison.
+- Editing `react.txt` to name the library's colour would have turned the row
+  green in seconds. That was declined: changing a benchmark's input so its
+  check passes is how a benchmark stops being evidence.
 
-The script exits non-zero while any property differs, so this stays visible.
+The check remains live and exits non-zero if any property diverges again, so a
+future change to either side that breaks the equivalence will be caught rather
+than assumed away.

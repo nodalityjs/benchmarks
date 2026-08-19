@@ -19,7 +19,7 @@ The sites measured in the dissertation are private, so the script takes project
 paths rather than hard-coding them. Point it at your own; each project needs
 its dependencies installed and a `nodality prerender` script.
 
-## Result (2026-08-19, nodality 1.2.4)
+## Result (2026-08-19, nodality 1.2.5)
 
     blue70.cz      49 artefacts – byte-identical
     sls3.cz        32 artefacts – byte-identical
