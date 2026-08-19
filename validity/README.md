@@ -14,29 +14,33 @@ instead of validated by URL; the bytes are the served bytes either way.
 Errors are grouped by the party that can fix them, because a verdict alone
 does not say whose defect it is.
 
-## Result (2026-08-19)
+## Result (2026-08-19, after the 1.2.4 redeploy)
 
     SITE                    ERRORS  OTHER
     https://blue70.cz/           0      0
     https://sls3.cz/             1      0
         1x  author content (missing alt text)
-    http://gesos.cz/            22     16
-       14x  library (id=undefined, fixed in 1.2.4)
+    http://gesos.cz/             8      2
         7x  author content (missing alt text)
         1x  site template (no doctype)
-    https://relays.app/          4      2
+    https://relays.app/          3      1
         2x  toolchain (jsdom mangles min()/clamp())
-        1x  library (id=undefined, fixed in 1.2.4)
         1x  site template (script after </body>)
 
     1 of 4 deployments pass with zero errors
 
+The first run of this script, before the repair, returned 0 / 1 / 22 / 4. The
+difference is the library's entire share: 15 errors across two sites, all of
+them `Duplicate ID "undefined"`, all gone once the sites were rebuilt against
+1.2.4 and redeployed. Nothing else changed, and no page's content changed —
+word counts are identical on all 102 rebuilt artefacts.
+
 Three distinct causes, and only one of them is the library:
 
-- **library** — several components wrote `setAttribute("id", x)` without
+- **library** (resolved) — several components wrote `setAttribute("id", x)` without
   checking `x`, so a missing id shipped as the literal `id="undefined"`. One
-  is legal; two collide, and duplicate ids are a conformance error. Fixed in
-  `nodality` 1.2.4; the sites clear these errors when rebuilt against it.
+  is legal; two collide, and duplicate ids are a conformance error. Fixed in `nodality` 1.2.4. All four sites were rebuilt against it and
+  redeployed on 19 August 2026, and the errors are gone.
 - **toolchain** — prerendering runs the page in jsdom, whose CSS parser drops
   `min()` and `clamp()` declarations outright and corrupts them inside
   `calc()`. This costs validity, and it silently loses styling, which is the
