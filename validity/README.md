@@ -14,26 +14,32 @@ instead of validated by URL; the bytes are the served bytes either way.
 Errors are grouped by the party that can fix them, because a verdict alone
 does not say whose defect it is.
 
-## Result (2026-08-19, after the 1.2.4 redeploy)
+## Result (2026-08-19, after the alt-text and doctype repairs)
 
     SITE                    ERRORS  OTHER
     https://blue70.cz/           0      0
-    https://sls3.cz/             1      0
-        1x  author content (missing alt text)
-    http://gesos.cz/             8      2
-        7x  author content (missing alt text)
-        1x  site template (no doctype)
+    https://sls3.cz/             0      0
+    http://gesos.cz/             0      2
     https://relays.app/          3      1
         2x  toolchain (jsdom mangles min()/clamp())
-        1x  site template (script after </body>)
+        1x  hosting provider (analytics injected after </body>)
 
-    1 of 4 deployments pass with zero errors
+    3 of 4 deployments pass with zero errors
 
-The first run of this script, before the repair, returned 0 / 1 / 22 / 4. The
-difference is the library's entire share: 15 errors across two sites, all of
-them `Duplicate ID "undefined"`, all gone once the sites were rebuilt against
-1.2.4 and redeployed. Nothing else changed, and no page's content changed —
-word counts are identical on all 102 rebuilt artefacts.
+Three runs, in order: **27 errors → 12 → 3.**
+
+The first run found the sites as they stood. The second followed the 1.2.4
+release, which removed the library's entire share — 15 duplicate
+`id="undefined"` errors. The third followed repairs to the sites' own content:
+every image across all four deployments now carries an `alt` (a description
+where the image carries meaning, an empty one where it is decorative), and
+gesos.cz's five authored pages gained the doctype they never had.
+
+Not one remaining error is attributable to the library, to the pipeline, or to
+the sites' authors. What is left is two CSS errors from the simulator used to
+prerender, and one script the hosting provider appends to the served response
+after `</body>` — identified by diffing the served bytes against the deployed
+build, which differ by exactly that script and nothing else.
 
 Three distinct causes, and only one of them is the library:
 
@@ -45,9 +51,13 @@ Three distinct causes, and only one of them is the library:
   `min()` and `clamp()` declarations outright and corrupts them inside
   `calc()`. This costs validity, and it silently loses styling, which is the
   worse of the two. Not fixed; see the limitation recorded in Chapter 8.
-- **author content and site template** — missing `alt` attributes, a missing
-  doctype, and a `<script>` after `</script>`. These belong to the sites, not
-  to the library, and the checker cannot tell the difference on its own.
+- **author content and site template** (resolved) — missing `alt` attributes
+  and a missing doctype. These belonged to the sites rather than the library,
+  and the checker cannot tell the difference on its own; both were repaired on
+  19 August 2026.
+- **hosting provider** — a traffic-analytics script appended after `</body>`
+  by the host. Neither authored nor emitted: the served bytes differ from the
+  deployed build by exactly that script.
 
 The figures are a snapshot of live third-party deployments and will move as
 those sites are rebuilt and redeployed. Re-running the script re-measures.

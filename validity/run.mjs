@@ -29,7 +29,10 @@ function cause(message) {
   if (/^CSS: /.test(message))                          return "toolchain (jsdom mangles min()/clamp())";
   if (/must have an .alt. attribute/.test(message))    return "author content (missing alt text)";
   if (/without seeing a doctype/.test(message))        return "site template (no doctype)";
-  if (/Stray start tag .script./.test(message))        return "site template (script after </body>)";
+  // Not the author's markup and not the library's: the host appends a
+  // traffic-analytics beacon after </body>. The served bytes differ from the
+  // deployed build by exactly that script, which is how it was identified.
+  if (/Stray start tag .script./.test(message))        return "hosting provider (analytics injected after </body>)";
   return "other";
 }
 
