@@ -89,6 +89,11 @@ for the same property, and byte-identical output on a repeated build. Each case
 is compiled through the published compiler in a `jsdom` document and compared on
 the rendered output rather than on the library's internals.
 
+## validity
+
+WHATWG conformance of the deployed pages, measured with the W3C Nu validator and
+grouped by the party that can fix each error. See `validity/README.md`.
+
 Files: `properties/` (`run.mjs` for the minimal fixtures, `random.mjs` for the seeded randomised sweep, `template.html`).
 
 Run:
