@@ -89,6 +89,13 @@ for the same property, and byte-identical output on a repeated build. Each case
 is compiled through the published compiler in a `jsdom` document and compared on
 the rendered output rather than on the library's internals.
 
+## agent-surface
+
+The two checks of Chapter 8's derived agent surface, run against the deployed
+site: the manifest is readable without executing anything, and a client that
+knows nothing about the site drives it through the declared interface. See
+`agent-surface/README.md`.
+
 ## validity
 
 WHATWG conformance of the deployed pages, measured with the W3C Nu validator and
